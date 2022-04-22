@@ -39,7 +39,6 @@ class DetailsFragment : Fragment() {
         arguments?.getParcelable<Weather>(KEY_BUNDLE_WEATHER)?.let {
             renderData(it)
         }
-
     }
 
     private fun renderData(weather: Weather) {

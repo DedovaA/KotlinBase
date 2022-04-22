@@ -12,13 +12,5 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState==null){
             supportFragmentManager.beginTransaction().replace(R.id.container, WeatherListFragment.newInstance()).commit()
         }
-
-
-        val looperNotNullable: Looper = getMainLooper()
-        val looperNullable: Looper? = getMainLooper()
-
-
-
     }
-
 }

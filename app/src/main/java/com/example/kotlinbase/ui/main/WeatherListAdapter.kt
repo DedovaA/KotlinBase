@@ -41,6 +41,8 @@ class WeatherListAdapter(
 
     inner class CityHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(weather: Weather) {
+            //т.к. viewHolder ранее уже было надуто из layout в onCreateViewHolder, то можно получить
+            //экз-р binding-а с помощью метода bind(view), передав в аргумент вышеупомянутый view
             FragmentWeatherListRecyclerItemBinding.bind(itemView).apply {
                 tvCityName.text = weather.city.name
                 root.setOnClickListener {

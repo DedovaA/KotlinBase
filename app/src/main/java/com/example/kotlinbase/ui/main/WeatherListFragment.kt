@@ -46,14 +46,18 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.also {// TODO HW вынесты в initRecycler()
-            it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(requireContext())
-        }
+        initRecycler()
         val observer = {data: AppState -> renderData(data)}
         viewModel.getData().observe(viewLifecycleOwner, observer)
         setupFab()
         viewModel.getWeatherRussia()
+    }
+
+    private fun initRecycler(){
+        binding.recyclerView.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     //переключатель стран
@@ -103,7 +107,7 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
     }
 
     override fun onItemClick(weather: Weather) {
-        requireActivity().supportFragmentManager.beginTransaction().add(
+        requireActivity().supportFragmentManager.beginTransaction().replace(
             R.id.container,
             DetailsFragment.newInstance(Bundle().apply {
                 putParcelable(KEY_BUNDLE_WEATHER, weather)
