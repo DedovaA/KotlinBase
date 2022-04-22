@@ -4,35 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kotlinbase.AppState
-import com.example.kotlinbase.model.Repository
-import com.example.kotlinbase.model.RepositoryImpl
-import java.lang.Thread.sleep
+import com.example.kotlinbase.repository.RepositoryImpl
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
     private val repository: RepositoryImpl = RepositoryImpl()
 ) :
     ViewModel() {
-
+    //getter for LiveData
     fun getData(): LiveData<AppState> {
         return liveData
     }
 
-    fun getWeatherRussia() = getWeather(true)
-    fun getWeatherWorld() = getWeather(false)
-
-
+//запрос данных выполняется в отдельном потоке, но liveData должна обновляться в главном , поэтому
+//вызываем .postValue()
     private fun getWeather(isRussian:Boolean) {
         Thread {
             liveData.postValue(AppState.Loading)
-            //if ((0..10).random() > 0){
             if (true){
-                val answer = if(!isRussian) repository.getWorldWeatherFromLocalStorage() else repository.getRussianWeatherFromLocalStorage()
+                val answer = if(!isRussian) repository.getWorldWeatherFromLocalStorage()
+                            else repository.getRussianWeatherFromLocalStorage()
                 liveData.postValue(AppState.Success(answer))
             }
             else
                 liveData.postValue(AppState.Error(IllegalAccessException()))
         }.start()
     }
+
+    fun getWeatherRussia() = getWeather(true)
+    fun getWeatherWorld() = getWeather(false)
 
 }

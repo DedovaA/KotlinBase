@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kotlinbase.databinding.FragmentDetailsBinding
-import com.example.kotlinbase.model.Weather
+import com.example.kotlinbase.repository.Weather
 import com.example.kotlinbase.utils.KEY_BUNDLE_WEATHER
 import com.google.android.material.snackbar.Snackbar
 
 
 class DetailsFragment : Fragment() {
-
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding
@@ -31,7 +30,6 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        //return inflater.inflate(R.layout.fragment_main, container, false)
         return binding.root
     }
 
@@ -51,7 +49,7 @@ class DetailsFragment : Fragment() {
             with(weather) { //  TODO HW что-то не так
                 temperatureValue.text = temperature.toString()
                 feelsLikeValue.text = feelsLike.toString()
-                cityCoordinates.text = "${city.lat} ${city.lon}"
+                cityCoordinates.text = "${weather.city.lat} ${weather.city.lon}"
             }
             Snackbar.make(mainView, "Получилось", Snackbar.LENGTH_LONG).show()  //  TODO HW можно вынести в функцию-расширение
             mainView.showSnackBar()  //  TODO HW можно вынести в функцию-расширение

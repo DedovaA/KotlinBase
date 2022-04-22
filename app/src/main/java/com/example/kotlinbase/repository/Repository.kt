@@ -1,4 +1,4 @@
-package com.example.kotlinbase.model
+package com.example.kotlinbase.repository
 
 interface Repository {
     fun getWeatherFromServer():Weather

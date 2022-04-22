@@ -3,19 +3,25 @@ package com.example.kotlinbase.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinbase.databinding.FragmentWeatherListRecyclerItemBinding
-import com.example.kotlinbase.model.Weather
+import com.example.kotlinbase.repository.Weather
 
 class WeatherListAdapter(
     private val onItemListClickListener: OnItemListClickListener,
     private var data: List<Weather> = listOf()
 ) :
     RecyclerView.Adapter<WeatherListAdapter.CityHolder>() {
+// setter для data, чтобы список городов можно было устанавливать при каждом нажатии кнопки
+// пробую добавить diffutil
+        fun setData(dataNew: List<Weather>) {
+        val callback = WeatherDiffCallback(data, dataNew)
+        val diffResult = DiffUtil.calculateDiff(callback)
+        diffResult.dispatchUpdatesTo(this)
 
-    fun setData(dataNew: List<Weather>) {
         this.data = dataNew
-        notifyDataSetChanged() //DiffUtil кому интересно
+//        notifyDataSetChanged() //DiffUtil кому интересно
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityHolder {
@@ -43,5 +49,4 @@ class WeatherListAdapter(
             }
         }
     }
-
 }

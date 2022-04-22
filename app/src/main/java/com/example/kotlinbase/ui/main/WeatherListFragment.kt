@@ -1,23 +1,21 @@
 package com.example.kotlinbase.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinbase.AppState
 import com.example.kotlinbase.R
 import com.example.kotlinbase.databinding.FragmentWeatherListBinding
-import com.example.kotlinbase.model.Weather
+import com.example.kotlinbase.repository.Weather
 import com.example.kotlinbase.utils.KEY_BUNDLE_WEATHER
 import com.google.android.material.snackbar.Snackbar
 
 class WeatherListFragment : Fragment(),OnItemListClickListener {
-
 
     private var _binding: FragmentWeatherListBinding? = null
     private val binding: FragmentWeatherListBinding
@@ -58,6 +56,7 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
         viewModel.getWeatherRussia()
     }
 
+    //переключатель стран
     private fun setupFab() {
         binding.floatingActionButton.setOnClickListener {
             isRussian = !isRussian
