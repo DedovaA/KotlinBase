@@ -13,6 +13,7 @@ import com.example.kotlinbase.R
 import com.example.kotlinbase.databinding.FragmentWeatherListBinding
 import com.example.kotlinbase.repository.Weather
 import com.example.kotlinbase.utils.KEY_BUNDLE_WEATHER
+import com.example.kotlinbase.utils.showLongSnackBar
 import com.google.android.material.snackbar.Snackbar
 
 class WeatherListFragment : Fragment(),OnItemListClickListener {
@@ -40,7 +41,7 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
 
     var isRussian = true
     private val viewModel:MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
 
 
@@ -88,8 +89,7 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
         when (data) {
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
-                Snackbar.make(binding.root, "Не получилось ${data.error}", Snackbar.LENGTH_LONG)
-                    .show()
+                binding.root.showLongSnackBar("Не получилось ${data.error}")
             }
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE

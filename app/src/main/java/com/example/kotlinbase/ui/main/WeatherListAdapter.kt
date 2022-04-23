@@ -14,14 +14,13 @@ class WeatherListAdapter(
 ) :
     RecyclerView.Adapter<WeatherListAdapter.CityHolder>() {
 // setter для data, чтобы список городов можно было устанавливать при каждом нажатии кнопки
-// пробую добавить diffutil
+// пробую добавить diffUtil, чтобы адаптер понимал, что конкретно перерисовывать
         fun setData(dataNew: List<Weather>) {
         val callback = WeatherDiffCallback(data, dataNew)
         val diffResult = DiffUtil.calculateDiff(callback)
         diffResult.dispatchUpdatesTo(this)
-
         this.data = dataNew
-//        notifyDataSetChanged() //DiffUtil кому интересно
+//        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityHolder {
@@ -34,7 +33,7 @@ class WeatherListAdapter(
     }
 
     override fun onBindViewHolder(holder: CityHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount() = data.size

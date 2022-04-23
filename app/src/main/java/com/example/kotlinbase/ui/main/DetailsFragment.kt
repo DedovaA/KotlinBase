@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.kotlinbase.databinding.FragmentDetailsBinding
 import com.example.kotlinbase.repository.Weather
 import com.example.kotlinbase.utils.KEY_BUNDLE_WEATHER
-import com.google.android.material.snackbar.Snackbar
+import com.example.kotlinbase.utils.showLongSnackBar
 
 
 class DetailsFragment : Fragment() {
@@ -50,16 +50,9 @@ class DetailsFragment : Fragment() {
                 feelsLikeValue.text = feelsLike.toString()
                 cityCoordinates.text = "${weather.city.lat} ${weather.city.lon}"
             }
-            Snackbar.make(mainView, "Получилось", Snackbar.LENGTH_LONG).show()  //  TODO HW можно вынести в функцию-расширение
-            mainView.showSnackBar()  //  TODO HW можно вынести в функцию-расширение
+            //  моя функция расширения класса View "showLongSnackBar" - лежит в Utils.kt
+            mainView.showLongSnackBar("Получилось")
         }
-
-        //Toast.makeText(requireContext(),"РАБОТАЕТ",Toast.LENGTH_SHORT).show()
-    }
-
-    //  TODO HW
-    fun View.showSnackBar(){
-
     }
 
     companion object {
