@@ -41,15 +41,14 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    // правлено с with на apply
     private fun renderData(weather: Weather) {
-        with(binding) {
+        binding.apply {
             loadingLayout.visibility = View.GONE
             cityName.text = weather.city.name
-            with(weather) { //  TODO HW что-то не так
-                temperatureValue.text = temperature.toString()
-                feelsLikeValue.text = feelsLike.toString()
-                cityCoordinates.text = "${weather.city.lat} ${weather.city.lon}"
-            }
+            temperatureValue.text = weather.temperature.toString()
+            feelsLikeValue.text = weather.feelsLike.toString()
+            cityCoordinates.text = "${weather.city.lat} ${weather.city.lon}"
             //  моя функция расширения класса View "showLongSnackBar" - лежит в Utils.kt
             mainView.showLongSnackBar("Получилось")
         }
