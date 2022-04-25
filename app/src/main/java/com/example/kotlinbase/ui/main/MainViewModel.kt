@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kotlinbase.AppState
 import com.example.kotlinbase.repository.RepositoryImpl
+import kotlin.concurrent.thread
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -19,7 +20,7 @@ class MainViewModel(
 //запрос данных выполняется в отдельном потоке, но liveData должна обновляться в главном , поэтому
 //вызываем .postValue()
     private fun getWeather(isRussian:Boolean) {
-        Thread {
+        thread {
             liveData.postValue(AppState.Loading)
 //            if (true){
                 val answer = if(!isRussian) repository.getWorldWeatherFromLocalStorage()
@@ -28,7 +29,7 @@ class MainViewModel(
 //            }
 //            else
 //                liveData.postValue(AppState.Error(IllegalAccessException()))
-        }.start()
+        }
     }
 
     fun getWeatherRussia() = getWeather(true)

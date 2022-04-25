@@ -14,7 +14,6 @@ import com.example.kotlinbase.databinding.FragmentWeatherListBinding
 import com.example.kotlinbase.repository.Weather
 import com.example.kotlinbase.utils.KEY_BUNDLE_WEATHER
 import com.example.kotlinbase.utils.showLongSnackBar
-import com.google.android.material.snackbar.Snackbar
 
 class WeatherListFragment : Fragment(),OnItemListClickListener {
 
