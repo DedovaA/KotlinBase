@@ -1,7 +1,6 @@
 package com.example.kotlinbase.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +47,6 @@ class DetailsFragment : Fragment(), OnServerResponse {
     }
 
     private fun renderData(weather: WeatherDTO) {
-        Log.d("@@@", weather.factDTO.temperature.toString())
         binding.apply {
             loadingLayout.visibility = View.GONE
             cityName.text = currentCityName

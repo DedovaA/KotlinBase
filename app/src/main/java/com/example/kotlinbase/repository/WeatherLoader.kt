@@ -17,7 +17,6 @@ class WeatherLoader (private val onServerResponseListener: OnServerResponse) {
 
         val urlText = "https://api.weather.yandex.ru/v2/informers?lat=$lat&lon=$lon"
         val uri = URL(urlText)
-
         thread {
             lateinit var urlConnection: HttpsURLConnection
             try {
@@ -28,17 +27,16 @@ class WeatherLoader (private val onServerResponseListener: OnServerResponse) {
                         readTimeout = 1000
                         addRequestProperty("X-Yandex-API-Key", "")
                     }
-                Log.d("@@@", "+")
+
                     val buffer = BufferedReader(InputStreamReader(urlConnection.inputStream))
-                    val weatherDTO: WeatherDTO = Gson().fromJson(buffer.readLine(), WeatherDTO::class.java)
+                    val weatherDTO: WeatherDTO = Gson().fromJson(buffer, WeatherDTO::class.java)
                     Handler(Looper.getMainLooper()).post {
                         onServerResponseListener.onResponse(weatherDTO)
                     }
             } catch (e: Exception) {
-
+                e.toString()
             } finally {
                 urlConnection.disconnect()
-
             }
         }
     }

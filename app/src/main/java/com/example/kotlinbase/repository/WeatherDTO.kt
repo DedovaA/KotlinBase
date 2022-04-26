@@ -4,11 +4,11 @@ package com.example.kotlinbase.repository
 import com.google.gson.annotations.SerializedName
 
 data class WeatherDTO(
-    @SerializedName("factDTO")
+    @SerializedName("fact")
     val factDTO: FactDTO,
-    @SerializedName("forecastDTO")
+    @SerializedName("forecast")
     val forecastDTO: ForecastDTO,
-    @SerializedName("infoDTO")
+    @SerializedName("info")
     val infoDTO: InfoDTO,
     @SerializedName("now")
     val now: Int,
