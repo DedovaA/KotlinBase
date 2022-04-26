@@ -60,7 +60,6 @@ class WeatherListFragment : Fragment(),OnItemListClickListener {
         }
     }
 
-    //переключатель стран
     private fun setupFab() {
         binding.floatingActionButton.setOnClickListener {
             isRussian = !isRussian

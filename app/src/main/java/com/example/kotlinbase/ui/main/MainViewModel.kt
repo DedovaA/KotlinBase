@@ -12,13 +12,11 @@ class MainViewModel(
     private val repository: RepositoryImpl = RepositoryImpl()
 ) :
     ViewModel() {
-    //getter for LiveData
+
     fun getData(): LiveData<AppState> {
         return liveData
     }
 
-//запрос данных выполняется в отдельном потоке, но liveData должна обновляться в главном , поэтому
-//вызываем .postValue()
     private fun getWeather(isRussian:Boolean) {
         thread {
             liveData.postValue(AppState.Loading)
